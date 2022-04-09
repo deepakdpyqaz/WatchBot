@@ -76,14 +76,15 @@ exports.signUpUser = catchAsyncErrors(async (req, res, next) => {
         return next(new ErrorHandler("Please Enter Email & Password", 400));
     }
 
-    const user = await User.findOne({ email }).select("+password");
-
-    if (user) {
-        return next(new ErrorHandler("Email Already Registred", 401));
+    const user= await User.findOne({email}).select("+password");
+    const name = "null||none";
+    if(user){
+        return next(new ErrorHandler("Email Already Registred",401));
     }
     const usr = await User.create({
         email,
         password,
+        name
     });;
 
     sendToken(usr, 200, res);
