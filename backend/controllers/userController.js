@@ -15,19 +15,56 @@ exports.getUserDetails = catchAsyncErrors(async(req,res,next)=>{
     });
 });
 
-// -------------- Register User ---------------
+// -------------- Register User (Premise) ---------------
 
 exports.registerUser=catchAsyncErrors(async(req,res,next)=>{
-    const {name,email,password}=req.body;
+    const {name,email,password,PremiseDetails}=req.body;
     const user=await User.create({
         name,
         email,
         password,
+        PremiseDetails
     });
 
     sendToken(user,201,res);
 });
 
+// -------------- Register User (Client) ---------------
+
+exports.registerClient=catchAsyncErrors(async(req,res,next)=>{
+    const {name,email,password,PremiseDetails}=req.body;
+    const user=await User.create({
+        name,
+        email,
+        password,
+        PremiseDetails
+    });
+
+    sendToken(user,201,res);
+});
+
+// -------------- SignUp User ------------
+
+exports.signUpUser = catchAsyncErrors(async (req,res,next)=>{
+    const {email,password}=req.body;
+    //checking if user given password and email both
+    if(!email || !password){
+        return next(new ErrorHandler("Please Enter Email & Password",400));
+    }
+
+    const user= await User.findOne({email}).select("+password");
+    
+    if(user){
+        return next(new ErrorHandler("Email Already Registred",401));
+    }
+    const usr=await User.create({
+        email,
+        password,
+    });;
+    
+    sendToken(usr,200,res);
+    
+})
 // -------------- Login User ------------
 
 exports.loginUser = catchAsyncErrors(async (req,res,next)=>{
@@ -40,7 +77,7 @@ exports.loginUser = catchAsyncErrors(async (req,res,next)=>{
     const user= await User.findOne({email}).select("+password");
     
     if(!user){
-        return next(new ErrorHandler("Invalid email or password",401));
+        return next(new ErrorHandler("Invalid Email or Password",401));
     }
 
     const isPasswordMatched = await user.comparePassword(password);
@@ -49,7 +86,6 @@ exports.loginUser = catchAsyncErrors(async (req,res,next)=>{
         return next(new ErrorHandler("Invalid email or password",401))
     }
     
-
     sendToken(user,200,res);
 
 })
