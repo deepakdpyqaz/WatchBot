@@ -14,7 +14,6 @@ const ClientFormSchema = new mongoose.Schema({
     email:{
         type:String,
         required:[true,"Please Enter Your Email"],
-        unique:true,
         validate:true,
         validate:[validator.isEmail,"Please Enter a valid Email"],
     },
