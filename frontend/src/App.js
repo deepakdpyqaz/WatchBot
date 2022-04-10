@@ -5,9 +5,15 @@ import WebFont from "webfontloader";
 import BusinessPage from "./Components/AdminPage/businessPage";
 import Home from "./Components/HomePage/home";
 import Registration from "./Components/RegistrationPage/Registration";
+<<<<<<< HEAD
 import Setting from "./Components/setting/setting";
 import Setting from "./Components/setting/setting";
 import Blocklist from "./Components/Blocklist/Blocklist"
+=======
+import Management from "./Components/ManagementPage/Management";
+import SettingsPage from "./Components/SettingsPage/SettingsPage";
+
+>>>>>>> management_routes
 // import Loader from "./Components/layout/Loader/loader";
 
 function App() {
@@ -23,11 +29,16 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/registerpage" element={<Registration/>}/>
+        {/* <Route path="/registerpage" element={<Registration/>}/> */}
         <Route path="/registerpage/main" element={<BusinessPage/>}/>
         <Route path="/registerpage/setting" element={<Setting/>}/>
         <Route path="/registerpage/setting" element={<Setting/>}/>
         <Route path="/todolist" element={<Blocklist/>}/>
+        <Route path="/premise" element={<BusinessPage/>}>
+          <Route path="management" element={<Management/>}/>
+          <Route path="settings" element={<SettingsPage/>}/>
+        </Route>
+
       </Routes>
     </Router>
   );
