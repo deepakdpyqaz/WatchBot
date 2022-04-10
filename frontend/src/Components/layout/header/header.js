@@ -10,16 +10,16 @@ import {useLocation} from "react-router-dom";
 
 
 const Header = () => {
-   const header_ref = useRef();
-   const location = useLocation();
-   useEffect(()=>{
-     if(header_ref.current){
-       header_ref.current.nextSibling.style.paddingTop = "30px";
-     }
-   },[location])
+    const headerRef = useRef();
+    const location = useLocation();
+    useEffect(()=>{
+      if(headerRef.current){
+        headerRef.current.nextSibling.style.paddingTop = "30px";
+      }
+    },[location])
     return (
         <>
-          <div className="header" ref={header_ref}>
+          <div className="header" ref={headerRef}>
             <div className="header_info">
                 <Sidebar className="sidebar-icon"/>
                 {/* <img src={Img} id="header_img" alt="failed-to-fetch"/> */}

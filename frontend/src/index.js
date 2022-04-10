@@ -5,12 +5,16 @@ import App from './App';
 import {positions,transitions,Provider as AlertProvider} from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 
-const options={
-  timeout:5000,
-  positions:positions.BOTTOM_CENTER,
-  transition:transitions.SCALE,
-}
-
+const options = {
+  timeout: 10000,
+  position: positions.BOTTOM_CENTER,
+  offset:"2vh",
+  containerStyle:{
+    justifyContent:"stretch",
+    zIndex:10000,
+    textTransform:"capitalize"
+  }
+};
 ReactDOM.render(
   <AlertProvider template={AlertTemplate} {...options}> 
     <App />

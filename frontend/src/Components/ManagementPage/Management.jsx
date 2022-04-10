@@ -15,6 +15,11 @@ import VideoCameraFrontIcon from '@mui/icons-material/VideoCameraFront';
 import LinkedCameraIcon from '@mui/icons-material/LinkedCamera';
 import Button from "@mui/material/Button";
 import Loader from "../layout/Loader/loader";
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
 axios.defaults.baseURL = "http://localhost:8000/";
 
 function cleanup() {
@@ -59,7 +64,7 @@ function WebcamDetection() {
         </>
     )
 }
-function CanvasSupport() {
+function CanvasSupport(props) {
     const [input, setInput] = useState(null);
     const [output, setOutput] = useState(null);
     const [ctxi, setCtxi] = useState(null);
@@ -77,10 +82,10 @@ function CanvasSupport() {
     const toggleLoading = () => {
         setOpen(!open);
     };
-    function predictImage(input,output,ctxi,ctxo) {
+    function predictImage(input, output, ctxi, ctxo) {
         if (input != null && output != null) {
             let data = ctxi.getImageData(0, 0, 416, 416);
-            setOpen(true);
+            // setOpen(true);
             axios.post("http://localhost:8000/process", {
                 "data": Array.from(data.data).filter((elem, idx) => {
                     return idx % 4 != 3
@@ -90,7 +95,7 @@ function CanvasSupport() {
                 ctxo.clearRect(0, 0, width, height);
                 ctxo.beginPath(0, 0, width, height);
                 ctxo.putImageData(data, 0, 0);
-                console.log(res.data.data.licences)
+                props.updateLicences(res.data.data.licences);
                 if (res.status) {
                     for (let detection of res.data.data.detection) {
                         let x = detection[0][0];
@@ -103,10 +108,10 @@ function CanvasSupport() {
                         ctxo.stroke();
                     }
                 }
-            }).catch((e)=>{
+            }).catch((e) => {
                 alert(e.message);
-            }).finally(()=>{
-                setOpen(false);
+            }).finally(() => {
+                // setOpen(false);
             })
         }
     }
@@ -124,11 +129,11 @@ function CanvasSupport() {
         setOutput(op);
         setCtxi(ctxip);
         setCtxo(ctxop);
-        setTimeout(()=>{
+        setTimeout(() => {
             setInterval(() => {
-                predictImage(ip,op,ctxip,ctxop);
-            }, 10000);
-        },500)
+                predictImage(ip, op, ctxip, ctxop);
+            }, 2000);
+        }, 500)
     }, [])
     return (
         <Grid container justifyContent="center">
@@ -137,21 +142,26 @@ function CanvasSupport() {
                 open={open}
             >
                 {/* <CircularProgress color="primary" /> */}
-                <Loader/>
+                <Loader />
             </Backdrop>
             <Grid item xs={12} md={6} justifyContent="center" style={{ 'textAlign': "center" }}>
-                <canvas id="input"  width="416" height="416" />
+                <canvas id="input" width="416" height="416" />
             </Grid>
             <Grid item xs={12} md={6} justifyContent="center" style={{ 'textAlign': "center" }}>
-                <canvas id="output"  width="416" height="416" />
+                <canvas id="output" width="416" height="416" />
             </Grid>
-            <Grid item md={12} style={{ "marginTop": "20px", 'textAlign': "center","marginBottom":"50px" }} justifyContent="center">
+            <Grid item md={12} style={{ "marginTop": "20px", 'textAlign': "center", "marginBottom": "50px" }} justifyContent="center">
             </Grid>
         </Grid>
     )
 }
 export default function Detection() {
     const [open, setOpen] = useState(false);
+    const [licences, setLicences] = useState([]);
+
+    const updateLicences = (lic) => {
+        setLicences(lic);
+    }
     const handleClose = () => {
         setOpen(false);
     };
@@ -180,7 +190,7 @@ export default function Detection() {
                 open={open}
             >
                 {/* <CircularProgress color="primary" /> */}
-                <Loader/>
+                <Loader />
             </Backdrop>
             <div>
 
@@ -189,7 +199,26 @@ export default function Detection() {
                         <WebcamDetection />
                     </Grid>
                     <Grid item rowSpacing={12} xs={12} style={{ "marginTop": "50px" }}>
-                        <CanvasSupport />
+                        <CanvasSupport updateLicences={updateLicences} />
+                    </Grid>
+                    <Grid item rowSpacing={12} xs={12} style={{ "marginTop": "50px" }}>
+                        <List>
+                            {
+                            (  
+                                licences.length? 
+                                licences.map((elem)=>{
+                                    return (
+                                        <ListItem disablePadding key={elem}>
+                                            <ListItemButton>
+                                                <ListItemText primary={`Vehicle Deteced ${elem}`} />
+                                            </ListItemButton>
+                                        </ListItem>
+                                    )
+                                })     
+                                :null
+                            )
+                            }
+                        </List>
                     </Grid>
                 </Grid>
             </div>

@@ -10,8 +10,6 @@ import Blocklist from "./Components/Blocklist/Blocklist"
 import Management from "./Components/ManagementPage/Management";
 import SettingsPage from "./Components/SettingsPage/SettingsPage";
 import Client from "./Components/Client Page/client";
-
-import Client from "./Components/Client Page/client";
 import Login from "./Components/LoginPage/login"
 // import Loader from "./Components/layout/Loader/loader";
 
@@ -37,8 +35,8 @@ function App() {
         <Route path="/registerpage/setting" element={<Setting/>}/>
         <Route path="/todolist" element={<Blocklist/>}/>
         <Route path="/premise" element={<BusinessPage/>}>
-          <Route path="management" element={<Management/>}/>
-          <Route path="settings" element={<SettingsPage/>}/>
+          <Route index element={<Management/>}/>
+          {/* <Route path="settings" element={<SettingsPage/>}/> */}
         </Route>
 
       </Routes>

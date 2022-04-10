@@ -7,7 +7,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
-import {Link} from "react-router-dom";
+
 import{FaHome} from "react-icons/fa"
 import{FcManager} from "react-icons/fc"
 import{FcAbout} from "react-icons/fc"
@@ -47,11 +47,9 @@ const MenuTabs = (item) => {
             <ListItem className="list_item" onClick={closeNav}>
                 <div className="img_style" ><FaHome/><span>Home</span></div>
             </ListItem>
-            <Link to="/premise/management">
             <ListItem className="list_item" onClick={closeNav}>
                 <div className="img_style" ><FcManager/><span>Management</span></div>
             </ListItem>
-            </Link>
             <ListItem className="list_item" onClick={closeNav}>
                 <div className="img_style" ><FcAbout/> <span>About</span></div>
             </ListItem>
@@ -61,12 +59,10 @@ const MenuTabs = (item) => {
         </List>
         <Divider className="divider"/>
         <List style={{marginLeft:"8px",marginRight:"8px",marginTop:"15px"}}>
-                <Link to="/premise/settings">
             <ListItem className="list_item" onClick={closeNav}>
                 <FiSettings/>
-                <div style={{marginLeft:"15px",fontSize:"14px"}} >Settings</div>
+                <div style={{marginLeft:"20px",fontSize:"14px"}} >Settings</div>
             </ListItem>
-            </Link>
             <ListItem className="list_item" onClick={closeNav}>
                 <BsQuestionCircle/>
                 <div style={{marginLeft:"20px",fontSize:"14px",fontWeight:"500"}} >Help & FeedBack</div>

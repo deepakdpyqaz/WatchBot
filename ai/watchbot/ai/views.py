@@ -13,24 +13,21 @@ def hello(request):
     return Response({"status":True})
 @api_view(["POST"])
 def ai(request):
-    # try:
+    try:
         data = request.data.get("data")
         premise_id = request.data.get("id")
-        # print(premise_id)
         pm = Premise.objects.all()
-        # print(pm)
         if Premise.objects.filter(id=premise_id).first() or True:
             array = np.array(data,dtype="uint8").reshape((416,416,-1))
             array = cv2.cvtColor(array,cv2.COLOR_RGB2BGR)
             out = processImage(array)
             return Response({"status":True,"data":out})
-        return Response({"status":True})
 
-        # else:
-        #     return Response(status=400)
+        else:
+            return Response(status=400)
 
-    # except Exception as e:
-    #     return Response({"status":False,"error":str(e)})
+    except Exception as e:
+        return Response({"status":False,"error":str(e)})
 
 
 
