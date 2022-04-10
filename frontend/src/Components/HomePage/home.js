@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect } from "react";
+import {Link} from "react-router-dom";
 import "./home.css";
 // import Loader from "../views/Loader/Loader.js";
 // import {useAlert} from "react-alert";
@@ -16,9 +17,9 @@ const Home = () => {
           {/* <h2>CarParking and Booking</h2> */}
 
           <div className="homeBtn">
-            <a href="#">
+            <Link to="/register">
               <button>Client</button>
-            </a>
+            </Link>
 
             <a href="#">
               <button>Admin</button>

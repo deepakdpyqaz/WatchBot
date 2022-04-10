@@ -8,8 +8,8 @@ const {
   resetPassword,
   updatePassword,
   signUpUser,
-  registerClient
 } = require("../controllers/userController");
+const {registerClient} = require("../controllers/ClientFormController");
 const {
   isAuthenticatedUser,
 } = require("../middleware/authentication");
