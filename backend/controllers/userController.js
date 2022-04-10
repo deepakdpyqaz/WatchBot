@@ -29,20 +29,6 @@ exports.registerUser=catchAsyncErrors(async(req,res,next)=>{
     sendToken(user,201,res);
 });
 
-// -------------- Register User (Client) ---------------
-
-exports.registerClient=catchAsyncErrors(async(req,res,next)=>{
-    const {name,email,password,PremiseDetails}=req.body;
-    const user=await User.create({
-        name,
-        email,
-        password,
-        PremiseDetails
-    });
-
-    sendToken(user,201,res);
-});
-
 // -------------- SignUp User ------------
 
 exports.signUpUser = catchAsyncErrors(async (req,res,next)=>{
@@ -127,7 +113,7 @@ exports.forgotPassword = catchAsyncErrors(async(req,res,next)=>{
     try{
         await sendEmail({
             email:user.email,
-            subject:`Ecommerce Password Recovery`,
+            subject:`WatchBot Password Recovery`,
             message,
         });
         res.status(200).json({

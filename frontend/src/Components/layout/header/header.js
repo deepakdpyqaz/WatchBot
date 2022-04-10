@@ -1,6 +1,7 @@
 import React from 'react'
 import "./header.css"
 import { IconButton } from '@mui/material'
+import SearchIcon from "@mui/icons-material/Search"
 import Avatar from "@mui/material/Avatar"
 import AvatarImg from '../../../assests/userImage/AvatarImg.jpg';
 // import Img from '../../../assets/logo/logo1.jpg'
@@ -12,11 +13,17 @@ const header = () => {
         <>
           <div className="header">
             <div className="header_info">
-                <Sidebar />
+                <Sidebar className="sidebar-icon"/>
                 {/* <img src={Img} id="header_img" alt="failed-to-fetch"/> */}
                 <div className="info">
                   WatchBot
                 </div>
+            </div>
+            <div className="header_search">
+              <IconButton>
+                <SearchIcon/>
+              </IconButton>
+                <input type="text" name="search" placeholder='search' />
             </div>  
             <div className="header_right">
               <IconButton>
