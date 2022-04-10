@@ -26,20 +26,18 @@
   letter-spacing: 6px;
 }
 
+
 .contact-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 0 auto;
-  padding: 20px;
   position: relative;
   max-width: 640px;
   background-color: #fff;
-  padding: 20px;
   border-radius: 20px;
 }
-
-.left-Text-canatiner {
+.left-Text-canatiner{
   font-size: 40px;
   font-family: sans-serif;
   text-align: left;
@@ -47,20 +45,12 @@
   margin: 20px ;
   background-image: url("/public/img_client.jpg");
   background-size: cover;
+  width:100%;
 }
 
-*,
-::after,
-::before {
-  box-sizing: border-box;
-  width: -webkit-fill-available;
-}
-
-/* Begin Right Contact Page */
 .direct-contact-container {
-  max-width: 740px;
+  max-width: 800px;
 }
-
 
 
 .form-group {
@@ -71,7 +61,6 @@
   width: 100%;
 }
 
-/* Begin Media Queries*/
 @media screen and (max-width: 850px) {
   .contact-wrapper {
     display: flex;
@@ -158,4 +147,4 @@
   .send-button {
     width: 99%;
   }
-}
+} 

@@ -46,12 +46,15 @@
     cursor: pointer;
     background-color: rgb(235, 183, 52);
     border: 2px solid #695902;
-    color:white;
+    color:#000;
     border-radius: 0;
-    padding:1vmax;
+    padding:1vmax 2vmax;
     transition: all 0.5s;
-    width:9vmax;
-    font: 500 1vmax "Roboto";
+    width:11vmax;
+    font: 500 1.5vmax "Roboto";
+    font-weight: 800;
+    border-radius: 50px;
+
 }
 
 .homeBtn > a > button:hover{

@@ -31,13 +31,6 @@ const ClientFormSchema = new mongoose.Schema({
     TypeOfVehicles: {
         type: String,
     },
-    Email: {
-        type: String,
-        required: [true, "Please Enter Your Email"],
-        unique: true,
-        validate: true,
-        validate: [validator.isEmail, "Please Enter a valid Email"],
-    },
     LicensePlateNumber: {
             type: String,
     },
