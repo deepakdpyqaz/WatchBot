@@ -5,6 +5,11 @@ import WebFont from "webfontloader";
 import BusinessPage from "./Components/AdminPage/businessPage";
 import Home from "./Components/HomePage/home";
 import Registration from "./Components/RegistrationPage/Registration";
+<<<<<<< Updated upstream
+=======
+import Setting from "./Components/setting/setting";
+import Blocklist from "./Components/Blocklist/Blocklist"
+>>>>>>> Stashed changes
 // import Loader from "./Components/layout/Loader/loader";
 
 function App() {
@@ -22,6 +27,11 @@ function App() {
         <Route path="/" element={<Home/>}/>
         <Route path="/registerpage" element={<Registration/>}/>
         <Route path="/registerpage/main" element={<BusinessPage/>}/>
+<<<<<<< Updated upstream
+=======
+        <Route path="/registerpage/setting" element={<Setting/>}/>
+        <Route path="/todolist" element={<Blocklist/>}/>
+>>>>>>> Stashed changes
       </Routes>
     </Router>
   );
