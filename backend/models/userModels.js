@@ -1,3 +1,5 @@
+// ------------ Premise Model ------------
+
 const mongoose=require ("mongoose");
 const validator=require("validator");
 const bcrypt= require("bcryptjs");
@@ -25,23 +27,47 @@ const userSchema = new mongoose.Schema({
         select:false,
         
     },
-    // avatar:{
-    //     public_id:{
-    //         type:String,
-    //         required:true,
-    //     },
-    //     url:{
-    //         type:String,
-    //         required:true,
-    //     },
-    // },
-    role:{
-        type:String,
-        default:"user",
+    avatar:{
+        public_id:{
+            type:String,
+            default:"This sample id",
+            required:true,
+        },
+        url:{
+            type:String,
+            default:"This is sample URL",
+            required:true,
+        },
     },
-    createAt:{
-        type:Date,
-        default:Date.now,
+    PremiseDetails:{
+        location:{
+            type:String,
+            default:"NULL",
+            required:true,
+        },
+        openingTime:{
+            type: Date,
+        },
+        closingTime:{
+            type: Date,
+        },
+        createAt:{
+            type:Date,
+            default:Date.now,
+        },
+        TypeOfVehicles:{
+            type:String,
+        },
+        AllowedVehicle:[{
+            NumberPlate:{
+                type:String,
+            }
+        }],
+        RejectVehicles:[{
+            NumberPlate:{
+                type:String,
+            }
+        }],
     },
     resetPasswordToken:String,
     resetPasswordExpire:Date,
