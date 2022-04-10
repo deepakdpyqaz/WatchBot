@@ -39,13 +39,13 @@
     border-radius: 20px;
   }
   
-  .left-Text-canatinery {
+  .left-canatinery {
     font-size: 40px;
     font-family: sans-serif;
     text-align: left;
     align-items: center;
     margin: 20px ;
-    background-image: url("/public/signup_img.jpg");
+    background-image: url("/public/login_img.jpg");
     background-size: cover;
   }
   

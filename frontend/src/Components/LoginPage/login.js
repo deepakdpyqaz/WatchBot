@@ -1,18 +1,18 @@
 import React, { Fragment, useState } from "react";
-import "./Registration.css";
+import "./login.css";
 import axios from "axios";
-function Registration() {
+
+function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [confirm_password, setConfirmPassword] = useState("");
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const registerDetails = { username, password, confirm_password};
-        const formUrl = "http://localhost:4000/api/v1/user/signup";
+        const registerDetails = { username, password};
+        const formUrl = "http://localhost:4000/api/v1/user/login";
         axios.post(formUrl, registerDetails).then((res) => {
-            alert("You have signed up successfully");
+            alert("You have logged in successfully");
         }).catch((err) => {
             alert(err.message);
         })
@@ -20,26 +20,26 @@ function Registration() {
 
     return (
         <Fragment>
-            <div id="body">
+            <div id="body" >
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
                     integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
                     crossorigin="anonymous"></link>
-                <h1 className="section-header">Premise Signup</h1>
+                <h1 className="section-header">Premise Login</h1>
 
                 <div className="contact-wrapper">
 
-                    <div className="left-Text-canatinery">
+                    <div className="left-canatinery">
 
                     </div>
 
 
-                    <div className="direct-contact-container">
+                    <div class="direct-contact-container" style={{minHeight:"300px",display:"flex","alignItems":"center"}}>
 
                         <form id="contact-form" class="form-horizontal" role="form" onSubmit={handleSubmit}>
                             <div class="form-group">
                                 <div class="col-sm-20">
                                     <label class="label">Enter Username</label>
-                                    <input type="text" class="form-control" id="name" placeholder="Username" name="username" value={username}
+                                    <input type="text" class="form-control" id="name" placeholder="Username" name="name" value={username}
                                         onChange={(e) => setUsername(e.target.value)} required />
                                 </div>
                             </div>
@@ -52,13 +52,6 @@ function Registration() {
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <div class="col-sm-20">
-                                    <label class="label">Confirm Password</label>
-                                    <input type="password" class="form-control" id="confirm_password" placeholder="Password" name="confirm_password" value={confirm_password} 
-                                    onChange={(e) => setConfirmPassword(e.target.value)} required />
-                                </div>
-                            </div>
 
                             {/* {(registerDetails.password ===  ?  : )} */}
                             
@@ -78,4 +71,4 @@ function Registration() {
     )
 }
 
-export default Registration;
+export default Login;
