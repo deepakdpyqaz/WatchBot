@@ -1,0 +1,24 @@
+.aboutContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 60%;
+  height: 70%;
+  border:2px solid red;
+  background-image: url("../../assests/side.jpeg") center center/cover;
+
+}
+.about{
+  /* width:100vmax; */
+
+}
+#about > h1{
+  margin:auto;
+}
+.d-flex{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}

@@ -28,7 +28,7 @@ const closeNav=()=>{
     setState(!state);
 }
 const MenuTabs = (item) => {
-    return(<div className="container">
+    return(<div className="sidebar_container">
     <div className="closebtn" ><span onClick={closeNav}>&times;</span></div>
     <div style={{ width: "250px" }} >
         <List style={{width:"250px",height:"100px"}}>
