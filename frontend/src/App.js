@@ -5,6 +5,7 @@ import WebFont from "webfontloader";
 import BusinessPage from "./Components/AdminPage/businessPage";
 import Home from "./Components/HomePage/home";
 import Registration from "./Components/RegistrationPage/Registration";
+import Setting from "./Components/setting/setting";
 // import Loader from "./Components/layout/Loader/loader";
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<Home/>}/>
         <Route path="/registerpage" element={<Registration/>}/>
         <Route path="/registerpage/main" element={<BusinessPage/>}/>
+        <Route path="/registerpage/setting" element={<Setting/>}/>
       </Routes>
     </Router>
   );
