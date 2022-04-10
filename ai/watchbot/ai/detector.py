@@ -8,6 +8,14 @@ from watchbot.settings import BASE_DIR
 weights_path = os.path.join(BASE_DIR, 'yolov4-tiny-custom-licence_best.weights')
 cfg_path = os.path.join(BASE_DIR, 'yolov4-tiny-custom.cfg')
 
+def build_tesseract_options(psm=7):
+    # tell Tesseract to only OCR alphanumeric characters
+    alphanumeric = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    options = "-c tessedit_char_whitelist={}".format(alphanumeric)
+    # set the PSM mode
+    options += " --psm {}".format(psm)
+    # return the built options string
+    return options
 
 # Load Yolo
 net = cv2.dnn.readNet(weights_path, cfg_path)
@@ -60,5 +68,12 @@ def processImage(img):
             out.append((boxes[i],label))
     licences = []
     for (x,y,w,h),label in out:
-        licences.append(pytesseract.image_to_string(img[x:x+w,y:y+h]))
+        options = build_tesseract_options()
+        scale_percent = 250 # percent of original size
+        width = int(w * scale_percent / 100)
+        height = int(h * scale_percent / 100)
+        dim = (width, height)
+        imgcopy = cv2.resize(cv2.cvtColor(copy.deepcopy(img[y:y+h,x:x+w]),cv2.COLOR_BGR2GRAY),dim)
+        cv2.imwrite("image.png",imgcopy)
+        licences.append(pytesseract.image_to_string(imgcopy))
     return {"licences":licences,"detection":out}

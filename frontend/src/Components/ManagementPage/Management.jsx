@@ -20,6 +20,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
+import {useAlert} from "react-alert";
 axios.defaults.baseURL = "http://localhost:8000/";
 
 function cleanup() {
@@ -69,6 +70,7 @@ function CanvasSupport(props) {
     const [output, setOutput] = useState(null);
     const [ctxi, setCtxi] = useState(null);
     const [ctxo, setCtxo] = useState(null);
+    const alert = useAlert();
     const width = 416;
     const height = 416;
     const colors = {
@@ -95,8 +97,10 @@ function CanvasSupport(props) {
                 ctxo.clearRect(0, 0, width, height);
                 ctxo.beginPath(0, 0, width, height);
                 ctxo.putImageData(data, 0, 0);
-                props.updateLicences(res.data.data.licences);
-                if (res.status) {
+                if(res.data && res.data.data && res.data.data.licences){
+                    props.updateLicences(res.data.data.licences);
+                }
+                if (res.status && res.data && res.data.data && res.data.data.detection) {
                     for (let detection of res.data.data.detection) {
                         let x = detection[0][0];
                         let y = detection[0][1];
@@ -109,7 +113,7 @@ function CanvasSupport(props) {
                     }
                 }
             }).catch((e) => {
-                alert(e.message);
+                alert.error(e.message);
             }).finally(() => {
                 // setOpen(false);
             })
@@ -132,7 +136,7 @@ function CanvasSupport(props) {
         setTimeout(() => {
             setInterval(() => {
                 predictImage(ip, op, ctxip, ctxop);
-            }, 2000);
+            }, 10000);
         }, 500)
     }, [])
     return (
@@ -160,7 +164,7 @@ export default function Detection() {
     const [licences, setLicences] = useState([]);
 
     const updateLicences = (lic) => {
-        setLicences(lic);
+        setLicences([...lic]);
     }
     const handleClose = () => {
         setOpen(false);
@@ -201,21 +205,19 @@ export default function Detection() {
                     <Grid item rowSpacing={12} xs={12} style={{ "marginTop": "50px" }}>
                         <CanvasSupport updateLicences={updateLicences} />
                     </Grid>
-                    <Grid item rowSpacing={12} xs={12} style={{ "marginTop": "50px" }}>
+                    <Grid item rowSpacing={12} xs={12} style={{ "marginTop": "50px","maxWidth":"600px","margin":"auto" }}>
                         <List>
                             {
                             (  
-                                licences.length? 
-                                licences.map((elem)=>{
+                                licences.map((elem,idx)=>{
                                     return (
                                         <ListItem disablePadding key={elem}>
                                             <ListItemButton>
-                                                <ListItemText primary={`Vehicle Deteced ${elem}`} />
+                                                <ListItemText primary={`${idx+1} vehicle Entered - ${elem}`} />
                                             </ListItemButton>
                                         </ListItem>
                                     )
-                                })     
-                                :null
+                                }) 
                             )
                             }
                         </List>
