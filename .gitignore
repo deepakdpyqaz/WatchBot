@@ -5,3 +5,6 @@
 # misc
 /backend/config/config.env
 /note.txt
+
+**/venv/
+.DS_Store

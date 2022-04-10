@@ -22,24 +22,29 @@ const ClientFormSchema = new mongoose.Schema({
         default:"NULL",
         required:true,
     },
-    openingTime:{
+    openingTime: {
         type: Date,
     },
-    closingTime:{
+    closingTime: {
         type: Date,
     },
-    createAt:{
-        type:Date,
-        default:Date.now,
+    TypeOfVehicles: {
+        type: String,
     },
-    TypeOfVehicles:{
-        type:String,
+    Email: {
+        type: String,
+        required: [true, "Please Enter Your Email"],
+        unique: true,
+        validate: true,
+        validate: [validator.isEmail, "Please Enter a valid Email"],
     },
-    LicensePlateNumber:[{
-        NumberPlate:{
-            type:String,
-        }
-    }],
+    LicensePlateNumber: {
+            type: String,
+    },
+    createAt: {
+        type: Date,
+        default: Date.now,
+    }
 });
 
 
