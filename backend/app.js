@@ -8,8 +8,10 @@ app.use(cookieParser());
 
 // Route imports
 const userRoute=require("./routes/userRoutes");
+const clientRoute=require("./routes/clientRoutes");
 
 app.use('/api/v1',userRoute);
+app.use('/api/v1',clientRoute);
 
 // Midddleware for error
 app.use(errorMiddleware);

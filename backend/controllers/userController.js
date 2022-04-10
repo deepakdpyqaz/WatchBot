@@ -29,44 +29,6 @@ exports.registerUser = catchAsyncErrors(async (req, res, next) => {
     sendToken(user, 201, res);
 });
 
-// -------------- Register User (Client) ---------------
-
-exports.registerClient = catchAsyncErrors(async (req, res, next) => {
-    const { name, location, openingTime, closingTime, TypeOfVehicles, Email, createAt, LicensePlateNumber } = req.body;
-    const client = await Client.create({
-        name, 
-        location, 
-        openingTime, 
-        closingTime, 
-        createAt, 
-        TypeOfVehicles, 
-        Email,
-        LicensePlateNumber
-    });
-    const message = `You have been successfully registered.`;
-
-    try {
-        await sendEmail({
-            email: client.Email,
-            subject: `WatchBot`,
-            message,
-        });
-        res.status(200).json({
-            success: true,
-            message: `Email sent to ${client.Email} successfully.`,
-        });
-
-    } catch (error) {
-        client.resetPasswordToken = undefined;
-        client.resetPasswordExpire = undefined;
-
-        await client.save({ validateBeforeSave: false });
-
-        return next(new ErrorHandler(error.message, 500));
-    }
-    sendToken(client, 201, res);
-});
-
 // -------------- SignUp User ------------
 
 exports.signUpUser = catchAsyncErrors(async (req, res, next) => {
@@ -150,8 +112,8 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
     try {
         await sendEmail({
-            email: user.email,
-            subject: `WatchBot Password Recovery`,
+            email:user.email,
+            subject:`WatchBot Password Recovery`,
             message,
         });
         res.status(200).json({
