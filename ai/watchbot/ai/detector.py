@@ -3,9 +3,10 @@ import numpy as np
 import time
 import copy
 import os
+import pytesseract
 from watchbot.settings import BASE_DIR
-weights_path = os.path.join(BASE_DIR, 'yolov4-tiny-custom-helmet_best.weights')
-cfg_path = os.path.join(BASE_DIR, 'yolov4-tiny-custom-helmet.cfg')
+weights_path = os.path.join(BASE_DIR, 'yolov4-tiny-custom-licence_best.weights')
+cfg_path = os.path.join(BASE_DIR, 'yolov4-tiny-custom.cfg')
 
 
 # Load Yolo
@@ -57,4 +58,7 @@ def processImage(img):
         if i in indexes:
             label = str(classes[class_ids[i]])
             out.append((boxes[i],label))
-    return out
+    licences = []
+    for (x,y,w,h),label in out:
+        licences.append(pytesseract.image_to_string(img[x:x+w,y:y+h]))
+    return {"licences":licences,"detection":out}

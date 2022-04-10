@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import ai
+from .views import ai,hello
 
 urlpatterns = [
-    path("process/", ai)
+    path("",hello),
+    path("process", ai)
 ]
