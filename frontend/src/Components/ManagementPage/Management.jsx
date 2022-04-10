@@ -136,7 +136,7 @@ function CanvasSupport(props) {
         setTimeout(() => {
             setInterval(() => {
                 predictImage(ip, op, ctxip, ctxop);
-            }, 10000);
+            }, 5000);
         }, 500)
     }, [])
     return (
